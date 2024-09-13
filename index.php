@@ -2,7 +2,9 @@
     $contacts = [
         ["name" => "alex", "phone" => "677777777"],
         ["name" => "nate", "phone" => "645654465"],
-        ["name" => "sam", "phone" => "53454354354"]
+        ["name" => "sam", "phone" => "53454354354"],
+        ["name" => "viktor", "phone" => "543543345"],
+        ["name" => "nadine", "phone" => "432423432"]
     ];
 ?>
 
