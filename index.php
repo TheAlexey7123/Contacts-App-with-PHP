@@ -1,4 +1,16 @@
 <?php
+
+require "database.php";
+
+try{
+    $contacts = $conn->query("select * from contacts");
+    var_dump($contacts);
+}
+
+catch(PDOException $e){
+    print("Error: " . $e->getMessage());
+    die();
+}
     // $contacts = [
     //     ["name" => "alex", "phone" => "677777777"],
     //     ["name" => "nate", "phone" => "645654465"],
@@ -7,13 +19,13 @@
     //     ["name" => "nadine", "phone" => "432423432"]
     // ];
 
-    if(file_exists("contacts.json")){
-        $contacts = json_decode(file_get_contents("contacts.json"), true);
-    }
+    // if(file_exists("contacts.json")){
+    //     $contacts = json_decode(file_get_contents("contacts.json"), true);
+    // }
 
-    else{
-        $contacts = [];
-    }
+    // else{
+    //     $contacts = [];
+    // }
 ?>
 
 <!DOCTYPE html>
