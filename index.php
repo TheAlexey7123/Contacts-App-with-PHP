@@ -4,7 +4,6 @@ require "database.php";
 
 try{
     $contacts = $conn->query("select * from contacts");
-    var_dump($contacts);
 }
 
 catch(PDOException $e){
