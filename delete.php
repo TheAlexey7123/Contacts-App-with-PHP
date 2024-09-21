@@ -3,9 +3,10 @@
     require "database.php";
 
     $id = $_GET['id'];
-    $contacts = $conn->prepare("SELECT * from contacts where id=:id")->bindParam(":id", $id);
+    $statement = $conn->prepare("SELECT * from contacts where id=:id");
+    $statement->execute([":id" => $id]);
 
-    if(!$contacts){
+    if(!$statement){
         http_response_code(404);
         print("HTTP 404 - NOT Found");
         return;
