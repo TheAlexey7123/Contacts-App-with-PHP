@@ -26,7 +26,7 @@
 
         else{
 
-            $statement = $conn->prepare("UPDATE contacts set name=:name and phone_number=:phone_number where id=:id");
+            $statement = $conn->prepare("UPDATE contacts set name=:name, phone_number=:phone_number where id=:id");
     
             $statement->execute([
                 ":id" => $id,
