@@ -5,23 +5,22 @@ require "database.php";
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        if(empty($_POST["name"]) || empty($_POST["phone_number"])){
+        if(empty($_POST["name"]) || empty($_POST["email"] || empty($_POST["password"]))){
             $error = "Please fill all the fields";
         }
 
-        else if(strlen($_POST["phone_number"]) < 9){
-            $error = "Phone number must be at least 9 characters";
+        else if(!str_contains($_POST["email"], "@")){
+            $error = "The email format is incorrect";
         }
 
         else{
-            $name = $_POST["name"];
-            $phoneNumber = $_POST["phone_number"];
-
-            $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES(:name, :phoneNumber)");
-            $statement->bindParam(":name", $_POST["name"]);
-            $statement->bindParam(":phoneNumber", $_POST["phone_number"]);
+            $statement = $conn->prepare("SELECT * from users where email=:email");
+            $statement->bindParam(":email", $_POST["email"]);
             $statement->execute();
-            header("Location: home.php");
+
+            if($statement->rowCount() > 0){
+                $error = "This user is already registered";
+            }
         }     
     }
     
@@ -34,7 +33,7 @@ require "database.php";
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Add New Contact</div>
+                    <div class="card-header">Register</div>
                     <div class="card-body">
                         <?php if ($error): ?>
                             <p class="text-danger">
@@ -42,7 +41,8 @@ require "database.php";
                             </p>
                         <?php endif ?>
 
-                        <form method="POST" action="add.php">
+                        <form method="POST" action="register.php">
+
                             <div class="mb-3 row">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
 
@@ -53,12 +53,20 @@ require "database.php";
                             </div>
 
                             <div class="mb-3 row">
-                                <label for="phone_number" class="col-md-4 col-form-label text-md-end">Phone
-                                    Number</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone_number" type="tel" class="form-control" name="phone_number"
-                                        autocomplete="phone_number" autofocus>
+                                    <input id="email" type="text" class="form-control" name="email"
+                                        autocomplete="email" autofocus>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control" name="phone_number"
+                                        autocomplete="password" autofocus>
                                 </div>
                             </div>
 

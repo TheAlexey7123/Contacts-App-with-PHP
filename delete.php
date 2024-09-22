@@ -17,5 +17,5 @@
     // $statement->execute();
 
     $conn->prepare("DELETE FROM contacts where id=:id")->execute([":id" => $id]);
-    header("Location: index.php");
+    header("Location: home.php");
 ?>

@@ -3,8 +3,15 @@ drop database if exists contacts_app;
 create database contacts_app;
 use contacts_app;
 
+create table users(
+    id int primary key auto_increment not null,
+    name varchar(255) not null,
+    email varchar(255) not null,
+    password varchar(255) not null
+);
+
 create table contacts (
-    id int primary key auto_increment,
+    id int primary key auto_increment not null,
     name varchar(64),
     phone_number varchar(64)
 );
