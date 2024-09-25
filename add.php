@@ -29,7 +29,11 @@ require "database.php";
             $statement->bindParam(":name", $_POST["name"]);
             $statement->bindParam(":phoneNumber", $_POST["phone_number"]);
             $statement->execute();
+
+            $_SESSION["flash"] = ["message" => "Contact {$_POST['name']} added."];
+
             header("Location: home.php");
+            return;
         }     
     }
     
