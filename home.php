@@ -2,6 +2,13 @@
 
     require "database.php";
 
+    session_start();
+
+    if(!isset($_SESSION["user"])){
+        header("Location: logout.php");
+        return;
+    }
+
     try{
         $contacts = $conn->query("select * from contacts");
     }

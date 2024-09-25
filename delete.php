@@ -2,6 +2,12 @@
 
     require "database.php";
 
+    if(!isset($_SESSION["user"])){
+        header("Location: logout.php");
+        return;
+    }
+
+
     $id = $_GET['id'];
     $statement = $conn->prepare("SELECT * from contacts where id=:id");
     $statement->execute([":id" => $id]);
