@@ -21,6 +21,18 @@ require "database.php";
             if($statement->rowCount() > 0){
                 $error = "This user is already registered";
             }
+
+            else{
+                $statement = $conn
+                ->prepare("INSERT INTO users (name, email, password) values(:name, :email, :password)")
+                ->execute([
+                        ":name" => $_POST["name"],
+                        ":email" => $_POST["email"],
+                        ":password" => password_hash($_POST["password"], PASSWORD_BCRYPT)
+                ]);
+
+                header("Location: home.php");
+            }
         }     
     }
     
@@ -65,7 +77,7 @@ require "database.php";
                                 <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="phone_number"
+                                    <input id="password" type="password" class="form-control" name="password"
                                         autocomplete="password" autofocus>
                                 </div>
                             </div>

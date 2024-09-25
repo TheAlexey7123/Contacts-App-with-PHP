@@ -16,6 +16,12 @@ create table contacts (
     phone_number varchar(64)
 );
 
+insert into users (name, email, password) values
+("test", "test@example.com", "test"),
+("test2", "test2@example.com", "test2"),
+("test3", "test3@example.com", "test3")
+;
+
 insert into contacts (name, phone_number) values ("Antonio", "321213231"), 
 ("Nate", "432432532"), 
 ("Pepe", "5436734"), 
