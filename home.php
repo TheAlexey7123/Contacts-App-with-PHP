@@ -10,7 +10,7 @@
     }
 
     try{
-        $contacts = $conn->query("select * from contacts");
+        $contacts = $conn->query("SELECT * from contacts where user_id = {$_SESSION["user"]["id"]}");
     }
 
     catch(PDOException $e){
