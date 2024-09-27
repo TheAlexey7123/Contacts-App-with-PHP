@@ -6,7 +6,7 @@ use contacts_app;
 create table users(
     id int primary key auto_increment not null,
     name varchar(255) not null,
-    email varchar(255) not null,
+    email varchar(255) not null UNIQUE,
     password varchar(255) not null
 );
 
